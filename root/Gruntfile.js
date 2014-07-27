@@ -35,8 +35,9 @@ module.exports = function (grunt) {
                     'banner': '<%= banner %>'
                 },
                 files: {
-                    './../dist/<%= pkg.name %>/page/js/main.js' : ['./../.sea-debug/<%= pkg.name %>/js/main.js'],
-                    './../dist/<%= pkg.name %>/page/css/main.js' : ['./../.sea-debug/<%= pkg.name %>/css/main.js']
+                    // write by yourself
+                    // example like this
+                    // './../dist/<%= pkg.name %>/page/js/main.js' : ['./../.sea-debug/<%= pkg.name %>/js/main.js'],
                 }
             }
         },
@@ -58,7 +59,25 @@ module.exports = function (grunt) {
                     'dest': './../dist/<%= pkg.name %>/' 
                 }
             } 
-        }, 
+        },
+        // stylus
+        stylus : {
+            'all-release' : {
+                'options' : {
+                    // auto import var.styl & mixin.styl
+                    'paths' : ['./../libs/stylus'],
+                    'import':[
+                        'var.styl',
+                        'mixin.styl'
+                    ]
+                },
+                'files' : {
+                    // write path by yourself
+                    // example like this
+                    // './../dist/<%= pkg.name%>/button/button.css' : './../<%= pkg.name %>/util/button/button.styl'
+                }
+            }
+        },
         uglify : {
             options : {
                 'compress': {
@@ -87,6 +106,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default',['transport','concat','copy']);
+    grunt.registerTask('default',['stylus','transport','concat','copy']);
     grunt.registerTask('release',['transport','concat','copy','uglify']);
 }

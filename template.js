@@ -24,7 +24,7 @@ exports.template = function (grunt,init,done) {
         // enter your module's name
         init.prompt('name'),
         init.prompt('version'),
-        init.prompt('author_name'),
+        init.prompt('author_name','youtang'),
         init.prompt('licenses', 'MIT')
     ],function (err,props) {
         if (err) {
@@ -43,8 +43,11 @@ exports.template = function (grunt,init,done) {
         init.writePackageJSON('package.json', {
             name: props.name,
             version: props.version,
+            author_name:props.auther_name,
+            licenses:props.licenses,
             node_version: '>= 0.8.0',
             devDependencies: {
+                'grunt-contrib-stylus':'~0.18.0',
                 'grunt-contrib-jshint': '~0.10.0',
                 'grunt-cmd-concat': '0.2.5',
                 'grunt-cmd-transport': '0.2.9',
